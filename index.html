@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir Pergaminho Vertical via JS</title>
+    <style>
+        body {
+            background-color: #001801;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+            margin: 0;
+            gap: 20px;
+            overflow: hidden;
+        }
+        button {
+            position: absolute;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #d4af37;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #2c1d11;
+            transition: all 1s ease-in;
+        }
+
+        .scroll-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90dvw;
+            max-width: 730px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .scroll-container.show {
+            opacity: 1;
+        }
+        
+        .scroll-body { position: relative; height: 0px; overflow: hidden; width: 100%; text-align: justify; max-height: 830px; max-width: 730px; }
+        
+        
+        .roller { 
+            position: absolute; 
+            height: 25px; 
+            width: 100%; 
+            background: #66462c; 
+            border-radius: 5px; 
+        }
+
+        .emotes{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            pointer-events: none; 
+        }
+
+        a{
+            font-weight: bolder;
+            text-decoration: underline;
+            color: black;
+        }
+
+        ul{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: nowrap wrap;
+            list-style: none;
+            gap: 15px;
+            width: 80%;
+        }
+
+        .butao{
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #d4af37;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #2c1d11;
+            transition: all 1s ease-in;
+        }
+        
+        #surpreso { top: 17px; right: 15px; }
+
+        /* #pix { top: 206px; left: 73px; }
+
+        #forms { top: 210px; right: 50px; }
+
+        #eba { top: 263px; left: 42%; } */
+
+        #cod { bottom: -100px; left: 15px; }
+
+        #tristonho { bottom: -10px; right: 15px; }
+
+    </style>
+</head>
+<body>
+
+    <button id="btnAbrir">MIM CLIQUE</button>
+
+    <div id="meuPergaminho" class="scroll-container">
+        <div class="roller top"></div>
+        
+        
+        <div class="scroll-body">
+            <div class="scroll-content">
+                <img src="./assets/surpresoo.png" alt="" id="surpreso" class="emotes">
+                <h2>OMG CONVITE EGC!!</h2>
+                
+                <!-- <img src="./assets/pixpix.png" alt="" id="pix" class="emotes">
+                <img src="./assets/formature.png" alt="" id="forms" class="emotes">
+                <img src="./assets/ebaeba.png" alt="" id="eba" class="emotes"> -->
+
+                <p>Que show!! Você recebeu o convite para o <strong>MELHOR ANIVERSÁRIO DO ANO</strong>. Com direito a <strong>comidas</strong>, <strong>bebidas</strong> (não alcoólicas pfvr), <strong>conversatites</strong> e <strong>diversão</strong> né que não pode faltar.
+                Das <strong>19:00</strong> ás <strong>21:00</strong> horas, no dia <strong>17/08/2026</strong>, na <strong><a target="_blank" href="https://www.instagram.com/_nativacafe/">Nativa Café</a></strong>.
+                <br/><br/>
+                Aceito pixis, presentes a mão, presença e criatividade.
+                <br/><br/> 
+                Para se informar melhor sobre a localização local e afins, vai ter um botão sobre isso aí em baixo também. Obrigado, de nada. Lhe esperoo!!</p>
+
+                
+
+                <ul> <a class="butao" href="https://maps.app.goo.gl/QMohM8acaG7eyRX88">Localização etc</a> <a class="butao" href="https://api.whatsapp.com/send?phone=5591991446037&text=CONFIRMADÍSSIMOO!!!">Confirmar Presença</a></ul>
+           
+                <img src="./assets/coding.png" alt="" id="cod" class="emotes">
+                <img src="./assets/tristonho.png" alt="" id="tristonho" class="emotes">
+            </div>
+        </div>
+        
+        
+        <div class="roller bottom"></div>
+    </div>
+
+    <script>
+        document.getElementById('btnAbrir').addEventListener('click', function() {
+            
+            if (!document.getElementById('css-pergaminho')) {
+                document.body.removeChild(document.getElementById('btnAbrir'));
+                
+                setTimeout( () => {
+                    const estilo = document.createElement('style');
+                    estilo.id = 'css-pergaminho';
+                    
+                    estilo.textContent = `
+                        .scroll-body {
+                            background-color: #f2e3c6;
+                            background-image: radial-gradient(circle, #f5ecd6 60%, #e2ce9f 100%);
+                            box-shadow: inset 0 0 20px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.3);
+                            border-left: 4px double #8a6d3b;
+                            border-right: 4px double #8a6d3b;
+                            animation: openScrollBody 2s ease-in-out forwards;
+                        }
+                        .scroll-content {
+                            box-sizing: border-box;
+                            height: 400px; /* Altura final interna do conteúdo */
+                            padding: 30px;
+                            font-family: 'Georgia', serif;
+                            color: #4a3319;
+                            opacity: 0;
+                            animation: fadeInContent 1s ease-in-out 1.5s forwards;
+                        }
+                        .roller {
+                            background: linear-gradient(to bottom, #66462c, #a07855, #66462c);
+                            box-shadow: 0px 3px 10px rgba(0,0,0,0.4);
+                            z-index: 10;
+                        }
+                            
+                        .roller::before, .roller::after {
+                            content: ''; position: absolute; top: -5px; width: 15px; height: 35px;
+                            background: radial-gradient(circle, #d4af37, #8a6d3b); border-radius: 50%;
+                        }
+                        .roller::before { left: -15px; }
+                        .roller::after { right: -15px; }
+                        
+                        
+                        .roller.top { animation: moveUp 2s ease-in-out forwards; }
+                        .roller.bottom { animation: moveDown 2s ease-in-out forwards; }
+
+                        
+                        @keyframes openScrollBody { 0% { height: 0px; } 100% { height: 90dvh; } }
+                        
+                        
+                        @keyframes moveUp { 0% { transform: translateY(0px); } 100% { transform: translateY(-45dvh); } }
+                        @keyframes moveDown { 0% { transform: translateY(0px); } 100% { transform: translateY(45dvh); } }
+                        
+                        @keyframes fadeInContent { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
+                    `;
+                    
+                    document.head.appendChild(estilo);
+                    document.getElementById('meuPergaminho').classList.add('show');
+                }, 100)
+
+                document.querySelectorAll(".butao")[1].addEventListener("click", () => {
+                    document.querySelector("#tristonho").setAttribute("src", "./assets/certin.png")
+                    alert("UOUUU QUE SHOW MUITO THANKS");
+                })
+                
+            }
+        });
+    </script>
+</body>
+</html>
